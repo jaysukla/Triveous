@@ -26,9 +26,8 @@ router.post("/create", auth, async (req, res) => {
 
 //  Get all the avalble categories
 
-router.get("/category", async (req, res) => {
+router.post("/category", async (req, res) => {
   let category = await ProductModel.distinct("category").exec();
-  console.log(category);
   res.send({ category });
 });
 
@@ -54,7 +53,7 @@ router.put("/cart/add/:uid/:pid", auth, async (req, res) => {
 
 // Remove from the cart
 
-router.put("/cart/remove/:uid/:pid", auth, async (req, res) => {
+router.delete("/cart/remove/:uid/:pid", auth, async (req, res) => {
   let uid = req.params.uid;
   let pid = req.params.pid;
   let user = await UserModel.find({ _id: uid });
